@@ -1,71 +1,80 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-img {
-  max-width: 100%;
-}
-.slider-game {
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  margin-top: 5%;
-}
-.container {
-  display: grid;
-  width: 25em;
-  height: 25em;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 8em;
-}
-.original-image {
-  width: 25em;
-  height: 25em;
-}
-.image-container {
-  border: 1px solid #ffffff;
-}
-.cover-screen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #edb506;
-  width: 100%;
-  height: 100%;
+body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
+  background-color: rgb(161, 151, 151);
 }
-#start-button {
-  font-size: 1.2em;
-  padding: 0.8em 2em;
+
+.puzzle {
+  display: grid;
+  grid-template-columns: repeat(3, 250px);
+  grid-template-rows: repeat(3, 250px);
+  justify-content: center;
+  background-color: white;
+  gap: 2px;
+}
+
+.cell {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.new-game {
+  padding: 10px;
+  margin-top: 20px;
+  outline: none;
   border: none;
-  border-radius: 3em;
-  cursor: pointer;
+  background-color: #59c25c;
+  border-radius: 5px;
+  color: white;
+  cursor: 'pointer';
 }
-#moves {
-  position: relative;
-  margin: 1em;
-  text-align: right;
-}
-.hide {
-  display: none;
-}
-@media only screen and (max-width: 768px) {
-  .slider-game {
-    flex-direction: column;
+
+
+@media (max-width:1024px){
+  .puzzle {
+      grid-template-columns: repeat(3, 200px);
+      grid-template-rows: repeat(3, 200px);
   }
-  .container {
-    width: 20em;
-    height: 20em;
-    grid-auto-rows: 6em;
+  .cell{
+      width: 100%;
+      height: 100%;
   }
-  .original-image {
-    width: 20em;
-    height: 20em;
+}
+
+@media (max-width:768px){
+  .puzzle {
+      grid-template-columns: repeat(3, 167px);
+      grid-template-rows: repeat(3, 168px);
+  }
+  .cell{
+      width: 100%;
+      height: 100%;
+  }
+}
+@media (max-width:520px){
+  .puzzle {
+      grid-template-columns: repeat(3, 120px);
+      grid-template-rows: repeat(3, 120px);
+  }
+  .cell{
+      width: 100%;
+      height: 100%;
+  }
+}
+
+@media (max-width:368px){
+  .puzzle {
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+  }
+  .cell{
+      width: 100%;
+      height: 100%;
   }
 }
