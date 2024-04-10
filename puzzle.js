@@ -1,37 +1,52 @@
-const position = ['top left','top center','top right','center left','center center','center right','bottom left','bottom center',]
-let puzzle = [ 0,1,2,3,4,5,6,7,8]
+const imgPos = [
+    'top left',
+    'top center',
+    'top right',
+    'center left',
+    'center center',
+    'center right',
+    'bottom left',
+    'bottom center',
+]
+let grid = [
+    0,1,2,
+    3,4,5,
+    6,7,8
+]
 
 
-const restart = () => {
-    let sequence = [0,1,2,3,4,5,6,7,8];
-    puzzle = [];
+
+
+const newGame = () => {
+    let seq = [0,1,2,3,4,5,6,7,8];
+    grid = [];
     for (let i=0;i<9;i++) {
-        let current = sequence.splice(Math.random()*sequence.length, 1);
-        puzzle.push(current[0]);
+        const cur = seq.splice(Math.random()*seq.length, 1);
+        grid.push(cur[0]);
     }
 }
 
 
-const shift = (i) => {
-    if (puzzle[i-1] == 8) {
-        puzzle[i-1] = puzzle[i];
-        puzzle[i] = 8;
-    } else if (puzzle[i+1] == 8) {
-        puzzle[i+1] = puzzle[i];
-        puzzle[i] = 8;
-    } else if (puzzle[i+3] == 8) {
-        puzzle[i+3]=puzzle[i];
-        puzzle[i] =8;
-    }else if (puzzle[i-3] == 8) {
-        puzzle[i-3]=puzzle[i];
-        puzzle[i] =8;
+const shift = (idx) => {
+    if (grid[idx-1] == 8) {
+        grid[idx-1] = grid[idx];
+        grid[idx] = 8;
+    } else if (grid[idx+1] == 8) {
+        grid[idx+1] = grid[idx];
+        grid[idx] = 8;
+    } else if (grid[idx+3] == 8) {
+        grid[idx+3]=grid[idx];
+        grid[idx] =8;
+    }else if (grid[idx-3] == 8) {
+        grid[idx-3]=grid[idx];
+        grid[idx] =8;
     }
     display();
 }
 
 const checkWin = () => {
     for (let i=0;i<9;i++) {
-        if (puzzle[i]!=i) {
+        if (grid[i]!=i) {
             return false;
         }
     }
@@ -39,31 +54,32 @@ const checkWin = () => {
 }
 
 const display = () => {
-    let gridDiv = document.querySelector('.puzzle').cloneNode(false);
+    let gridDiv = document.querySelector('.grid').cloneNode(false);
     for (let i=0;i<9;i++) {
         const cell = document.createElement('div')
         cell.classList.add('.cell');
-        if (puzzle[i]!=8) {
-            cell.style.backgroundPosition = position[puzzle[i]];
-            cell.style.backgroundImage = 'url("https://i.imgur.com/CmFuOpx_d.webp?maxwidth=760&fidelity=grand")';
+        if (grid[i]!=8) {
+            cell.style.backgroundPosition = imgPos[grid[i]];
+            cell.style.backgroundImage = 'url("https://i.imgur.com/CmFuOpx.png")';
             cell.style.cursor = 'pointer';
             cell.addEventListener('click', ()=>shift(i));
         }
         gridDiv.appendChild(cell);
     }
-    document.querySelector('.puzzle').replaceWith(gridDiv);
+    document.querySelector('.grid').replaceWith(gridDiv);
     setTimeout(() => {
         if (checkWin()) {
             alert("Congratulations! You solved the puzzle! Click on New Game to continue playing !!");
         }
     }, 10);
 }
-
-restart();
+newGame();
 display();
 
 
-document.querySelector('.new-game').addEventListener('click', ()=>{
-    restart();
+
+
+document.querySelector('button').addEventListener('click', ()=>{
+    newGame();
     display();
 })
